@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isOperated=false;
 
    //코드에서 사용할 뷰 선언
-    TextView result;
+    TextView result_text;
     TextView C;
     TextView MC;
     TextView MR;
@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
 
-        result = (TextView) findViewById(R.id.text1);
+        result_text = (TextView) findViewById(R.id.text1);
         C = (TextView) findViewById(R.id.text2);
         MC = (TextView) findViewById(R.id.text3);
         MR = (TextView) findViewById(R.id.text4);
@@ -77,9 +77,10 @@ public class MainActivity extends AppCompatActivity {
         Point = (TextView) findViewById(R.id.text23);
         Cal = (TextView) findViewById(R.id.text24);
 
-        result.setOnClickListener(view -> {
+        result_text.setOnClickListener(view -> {
         });
         C.setOnClickListener(view -> {
+            clear();
         });
         MC.setOnClickListener(view -> {
         });
@@ -141,26 +142,31 @@ public class MainActivity extends AppCompatActivity {
             result();
         });
 
-        setContentView(R.layout.activity_main);
-
 
 
     }
 
+    private void clear(){
+        result_text.setText("");
+        isOperated=false;
+        num1=0;
+        num2=0;
+    }
     private void pressNumView (int num){
     //  num 이 하나 생긴다.
     if (isOperated){
-        result.setText(String.valueOf(num));
+        result_text.setText(String.valueOf(num));
     }
     else{
-        String Result = result.getText().toString();
+        String Result = result_text.getText().toString();
         Result+=String.valueOf(num);
-        result.setText(String.valueOf(num));
+        result_text.setText(String.valueOf(Result));
     }
         isOperated=false;
     }
 
     private void operateButton(Operation operate){
+
         operation=operate;
         isOperated=true;
     }
@@ -169,19 +175,19 @@ public class MainActivity extends AppCompatActivity {
         switch (operation){
             case PLUS:
                 num1+=num2;
-                result.setText(String.valueOf(num1));
+                result_text.setText(String.valueOf(num1));
                 break;
             case MINUS:
                 num1-=num2;
-                result.setText(String.valueOf(num1));
+                result_text.setText(String.valueOf(num1));
                 break;
             case MULTIPLE:
                 num1*=num2;
-                result.setText(String.valueOf(num1));
+                result_text.setText(String.valueOf(num1));
                 break;
             case DIVIDE:
                 num1/=num2;
-                result.setText(String.valueOf(num1));
+                result_text.setText(String.valueOf(num1));
                 break;
         }
     }
