@@ -11,9 +11,10 @@
     >
     <TextView
         android:id="@+id/text1"
+        android:gravity="right"
         android:textColor="@color/white"
-        android:textSize="80sp"
-        android:text="0"
+        android:textSize="45sp"
+        android:text=""
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
@@ -356,7 +357,7 @@
         >
         <TextView
             android:id="@+id/text22"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="0"
@@ -369,7 +370,7 @@
             />
         <TextView
             android:id="@+id/text23"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -382,7 +383,7 @@
             />
         <TextView
             android:id="@+id/text24"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="="

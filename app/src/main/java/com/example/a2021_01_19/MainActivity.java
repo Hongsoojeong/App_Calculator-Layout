@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         MINUS, PLUS, MULTIPLE, DIVIDE
     };
 
-    int num1;
-    int num2;
+    double num1;
+    double num2;
     Operation operation;
     boolean isOperated=false;
 
@@ -89,8 +92,10 @@ public class MainActivity extends AppCompatActivity {
         M.setOnClickListener(view -> {
         });
         Backspace.setOnClickListener(view -> {
+            back();
         });
         Plus_minus.setOnClickListener(view -> {
+            setPlus_minus();
         });
         Percent.setOnClickListener(view -> {
         });
@@ -137,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             pressNumView(0);
         });
         Point.setOnClickListener(view -> {
+            dot();
         });
         Cal.setOnClickListener(view -> {
             result();
@@ -146,12 +152,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void back(){
+        String nowNum = result_text.getText().toString();
+        StringBuffer sb= new StringBuffer(nowNum);
+        if (sb.length()-1>=0) sb.deleteCharAt(sb.length()-1);
+        else Toast.makeText(getApplicationContext(), "No more num to erase", Toast.LENGTH_LONG).show();
+        result_text.setText(sb.toString());
+    }
+
     private void clear(){
         result_text.setText("");
         isOperated=false;
         num1=0;
         num2=0;
     }
+
+
+    private void dot(){
+        String result = result_text.getText().toString();
+        if (!result.contains(".")){
+            result+=".";
+            result_text.setText(result);
+        }
+    }
+
+    private void setPlus_minus(){
+        num1=Double.parseDouble(result_text.getText().toString());
+        result_text.setText(String.valueOf((-1)*num1));
+    }
+
     private void pressNumView (int num){
     //  num 이 하나 생긴다.
     if (isOperated){
@@ -159,39 +189,37 @@ public class MainActivity extends AppCompatActivity {
     }
     else{
         String Result = result_text.getText().toString();
-        Result+=String.valueOf(num);
+        if (result_text.equals("0"))
+            Result = String.valueOf(num);
+        else Result+=String.valueOf(num);
         result_text.setText(String.valueOf(Result));
     }
         isOperated=false;
     }
 
     private void operateButton(Operation operate){
-
+        num1=Double.parseDouble(result_text.getText().toString());
         operation=operate;
         isOperated=true;
     }
 
     private void result(){
+
+        num2=Double.parseDouble(result_text.getText().toString());
         switch (operation){
             case PLUS:
                 num1+=num2;
-                result_text.setText(String.valueOf(num1));
                 break;
             case MINUS:
                 num1-=num2;
-                result_text.setText(String.valueOf(num1));
                 break;
             case MULTIPLE:
                 num1*=num2;
-                result_text.setText(String.valueOf(num1));
                 break;
             case DIVIDE:
                 num1/=num2;
-                result_text.setText(String.valueOf(num1));
                 break;
         }
+        result_text.setText(String.valueOf(num1));
     }
-
-
-
 }
