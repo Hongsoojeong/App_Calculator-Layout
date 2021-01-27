@@ -2,15 +2,11 @@ package com.example.a2021_01_19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,10 +82,13 @@ public class MainActivity extends AppCompatActivity {
             clear();
         });
         MC.setOnClickListener(view -> {
+            goToGAME();
         });
         MR.setOnClickListener(view -> {
+            goToGAME();
         });
         M.setOnClickListener(view -> {
+            goToGAME();
         });
         Backspace.setOnClickListener(view -> {
             back();
@@ -151,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    private void goToGAME(){
+    Intent intent = new Intent (getApplicationContext(), gameActivity.class);
+    startActivity(intent);
+    }
 
     private void back(){
         String nowNum = result_text.getText().toString();
