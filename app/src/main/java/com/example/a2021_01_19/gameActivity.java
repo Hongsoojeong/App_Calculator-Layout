@@ -34,7 +34,7 @@ public class gameActivity extends AppCompatActivity {
         });
     }
     private void click_egg(){
-        count+=1;
+
         hit_text.setText(String.valueOf(count));
         if (count==20)
         {

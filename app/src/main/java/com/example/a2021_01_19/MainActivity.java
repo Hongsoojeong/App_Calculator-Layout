@@ -2,6 +2,7 @@ package com.example.a2021_01_19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     enum Operation {
         MINUS, PLUS, MULTIPLE, DIVIDE
     };
-
+    enum Page{
+        TAMAGO, MEMO
+    };
     double num1;
     double num2;
     Operation operation;
@@ -82,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
             clear();
         });
         MC.setOnClickListener(view -> {
-            goToGAME();
+            goTopage(Page.MEMO);
         });
         MR.setOnClickListener(view -> {
-            goToGAME();
+            goTopage(Page.TAMAGO);
         });
         M.setOnClickListener(view -> {
-            goToGAME();
+            goTopage(Page.MEMO);
         });
         Backspace.setOnClickListener(view -> {
             back();
@@ -203,6 +206,21 @@ public class MainActivity extends AppCompatActivity {
         num1=Double.parseDouble(result_text.getText().toString());
         operation=operate;
         isOperated=true;
+    }
+    
+    private void goTopage(Page page){
+        Intent intent; // Intent 선언
+        switch (page){ //switch case를 이용해 어떤 Intent로 정의해줄지 정함
+            case TAMAGO: // goToPage 함수의 인자로 Page.TAMGO가 들어왔을때
+                intent=new Intent(getApplicationContext(),gameActivity.class);
+                break;
+            case MEMO: // goToPage 함수의 인자로 Page.MEMO가 들어왔을 때
+                intent=new Intent (getApplicationContext(), MemoActivity.class);
+                break;
+            default: // 그 외의 상황
+                throw new IllegalStateException("Unexpexted value: "+page);
+        }
+        startActivity(intent); //swithc case에서 정의해준 INTENT로 startActivity 하여 화면 전환
     }
 
     private void result(){
