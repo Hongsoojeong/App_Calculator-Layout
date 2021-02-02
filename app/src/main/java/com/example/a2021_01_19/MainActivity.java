@@ -2,7 +2,6 @@ package com.example.a2021_01_19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -15,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         MINUS, PLUS, MULTIPLE, DIVIDE
     };
     enum Page{
-        TAMAGO, MEMO
+        TAMAGO, MEMO,Recyclear
     };
     double num1;
     double num2;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             goTopage(Page.TAMAGO);
         });
         M.setOnClickListener(view -> {
-            goTopage(Page.MEMO);
+            goTopage(Page.Recyclear);
         });
         Backspace.setOnClickListener(view -> {
             back();
@@ -216,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case MEMO: // goToPage 함수의 인자로 Page.MEMO가 들어왔을 때
                 intent=new Intent (getApplicationContext(), MemoActivity.class);
+                break;
+            case Recyclear:
+                intent=new Intent (getApplicationContext(), RecyclerActivity.class);
                 break;
             default: // 그 외의 상황
                 throw new IllegalStateException("Unexpexted value: "+page);
